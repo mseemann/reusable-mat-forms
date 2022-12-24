@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
+    "start": "ng serve app",
     "postinstall": "node ./decorate-angular-cli.js"
   },
   "private": true,

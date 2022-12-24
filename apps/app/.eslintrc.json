@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "reusable-mat-forms",
+            "prefix": "app",
             "style": "kebab-case"
           }
         ]
