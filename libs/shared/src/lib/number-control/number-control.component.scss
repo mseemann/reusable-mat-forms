@@ -1,0 +1,29 @@
+:host.readonly {
+   cursor: not-allowed;
+   pointer-events: none;
+}
+
+input {
+   border: none;
+   width: 100%;
+   font: inherit;
+   letter-spacing: inherit;
+   text-decoration: inherit;
+   text-transform: inherit;
+   height: auto;
+   min-width: 0;
+   border-radius: 0;
+   background: none;
+   appearance: none;
+   padding: 0;
+   outline: none;
+}
+
+input {
+   opacity: 0;
+   transition: opacity 200ms;
+}
+
+:host.floating input {
+   opacity: 1;
+}

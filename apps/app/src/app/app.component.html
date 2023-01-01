@@ -1,47 +1,60 @@
-<!--<h1>Reusable form field with custom control</h1>-->
-<!--<app-form-field label="Give me a name" hint="Hint" icon="sentiment_very_satisfied">-->
-<!--  <app-number-control [formControl]="nameControl" placeholder="The name"></app-number-control>-->
-<!--</app-form-field>-->
+<h3>Reusable form field with custom control</h3>
+<app-form-field
+   [label]="numberLabel"
+   hint="A number between 2 and 5 (inclusive)"
+   icon="sentiment_very_satisfied"
+>
+   <app-number-control
+      [formControl]="numberControl"
+      min="2"
+      max="5"
+      placeholder="The number"
+   ></app-number-control>
+</app-form-field>
+<div>
+   <button mat-stroked-button (click)="shortenTheLabel()">Shorten the label</button>
+</div>
 
+<pre>{{ numberControl.value | json }}</pre>
 <h3>The common way with a lot of app specific configuration</h3>
 <h4>Things will get messi</h4>
 <div>
-  <mat-form-field [attr.data-cy]="'a-number'" subscriptSizing="dynamic">
-    <mat-label
-      appShowAsTooltipIfNotCompletelyVisible
-      matTooltip=""
-      matTooltipPosition="above"
-      matTooltipShowDelay="300"
-      matTooltipPositionAtOrigin="true"
-    >
-      <span *ngIf="numberControl.dirty">modified: </span>
-      <span>{{ numberLabel }}</span>
-    </mat-label>
-    <input
-      matInput
-      type="number"
-      min="2"
-      max="5"
-      [formControl]="numberControl"
-      placeholder="The number"
-      [required]="true"
-    />
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>A number between 2 and 5 (inclusive)</mat-hint>
-    <mat-error *ngIf="numberControl.hasError('required')">Please provide a value</mat-error>
-    <mat-error *ngIf="numberControl.hasError('to-big')">Please provide a smaller value</mat-error>
-    <mat-error *ngIf="numberControl.hasError('to-small')">Please provide a bigger value</mat-error>
-  </mat-form-field>
+   <mat-form-field [attr.data-cy]="'a-number'" subscriptSizing="dynamic">
+      <mat-label
+         appShowAsTooltipIfNotCompletelyVisible
+         matTooltip=""
+         matTooltipPosition="above"
+         matTooltipShowDelay="300"
+         matTooltipPositionAtOrigin="true"
+      >
+         <span *ngIf="numberControl.dirty">modified: </span>
+         <span>{{ numberLabel }}</span>
+      </mat-label>
+      <input
+         matInput
+         type="number"
+         min="2"
+         max="5"
+         [formControl]="numberControl"
+         placeholder="The number"
+         [required]="true"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>A number between 2 and 5 (inclusive)</mat-hint>
+      <mat-error *ngIf="numberControl.hasError('required')">Please provide a value</mat-error>
+      <mat-error *ngIf="numberControl.hasError('max')">Please provide a smaller value</mat-error>
+      <mat-error *ngIf="numberControl.hasError('min')">Please provide a bigger value</mat-error>
+   </mat-form-field>
 </div>
 <div>
-  <button mat-stroked-button (click)="shortenTheLabel()">Shorten the label</button>
+   <button mat-stroked-button (click)="shortenTheLabel()">Shorten the label</button>
 </div>
 
 <h3>The common way to use the form field</h3>
 <mat-form-field>
-  <mat-label>Give me a name</mat-label>
-  <input matInput [formControl]="nameControl" placeholder="The name" [required]="true" />
-  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-  <mat-hint>Hint</mat-hint>
-  <mat-error>any invalid input</mat-error>
+   <mat-label>Give me a name</mat-label>
+   <input matInput [formControl]="nameControl" placeholder="The name" [required]="true" />
+   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+   <mat-hint>Hint</mat-hint>
+   <mat-error>any invalid input</mat-error>
 </mat-form-field>

@@ -17,11 +17,10 @@ describe('ShowAsTooltipIfNotCompletelyVisibleDirective', () => {
       declarations: [ShowAsTooltipIfNotCompletelyVisibleDirective],
       imports: [MatTooltipModule],
     }).compileComponents();
-  });
-  beforeEach(async () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
   });
+
   it('should create an instance', () => {
     expect(component).toBeTruthy();
   });

@@ -1,0 +1,26 @@
+<mat-form-field [attr.data-cy]="'a-number'" subscriptSizing="dynamic">
+   <mat-label
+      appShowAsTooltipIfNotCompletelyVisible
+      matTooltip=""
+      matTooltipPosition="above"
+      matTooltipShowDelay="300"
+      matTooltipPositionAtOrigin="true"
+   >
+      <span *ngIf="formFieldControl?.ngControl?.dirty">modified: </span>
+      <span>{{ label }}</span>
+   </mat-label>
+
+   <ng-content></ng-content>
+
+   <mat-icon matSuffix>{{ icon }}</mat-icon>
+   <mat-hint>{{ hint }}</mat-hint>
+   <mat-error *ngIf="formFieldControl?.ngControl?.hasError('required')"
+      >Please provide a value</mat-error
+   >
+   <mat-error *ngIf="formFieldControl?.ngControl?.hasError('max')"
+      >Please provide a smaller value</mat-error
+   >
+   <mat-error *ngIf="formFieldControl?.ngControl?.hasError('min')"
+      >Please provide a bigger value</mat-error
+   >
+</mat-form-field>

@@ -1,0 +1,12 @@
+<input
+   #input
+   type="number"
+   min="2"
+   max="5"
+   [ngModel]="value"
+   (ngModelChange)="valueChange($event)"
+   placeholder="The number"
+   [required]="required"
+   [placeholder]="placeholder"
+   (blur)="onBlur()"
+/>

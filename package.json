@@ -5,6 +5,8 @@
   "scripts": {
     "ng": "nx",
     "start": "ng serve app",
+    "test:all": "nx run-many --all --target=test",
+    "lint:all": "nx run-many --all --target=lint",
     "postinstall": "node ./decorate-angular-cli.js"
   },
   "private": true,
