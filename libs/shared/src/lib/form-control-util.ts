@@ -3,7 +3,7 @@ import { ControlValueAccessor } from '@angular/forms';
 export const createFormControlInputOutputTransformerProxy = <IN, OUT>(
    valueAccessor: ControlValueAccessor,
    transformIncommingValue: (inputValue: OUT) => IN,
-   transformOutgoingValue: (value: IN) => OUT
+   transformOutgoingValue: (outgoingValue: IN) => OUT
 ) => {
    return new Proxy(valueAccessor, {
       get(target: ControlValueAccessor, prop: keyof ControlValueAccessor, receiver) {

@@ -26,7 +26,7 @@ export class TestComponent implements OnInit {
          >(
             this.input.valueAccessor,
             (inputValue) => inputValue + '-test',
-            (value) => value?.trim() ?? null
+            (outgoingValue) => outgoingValue?.trim() ?? null
          );
       }
    }
