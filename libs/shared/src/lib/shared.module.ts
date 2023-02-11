@@ -6,16 +6,25 @@ import { FormFieldComponent } from './form-field/form-field.component';
 import { NumberControlComponent } from './number-control/number-control.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CombinedFormFieldComponent } from './combined-form-field/combined-form-field.component';
 
 const COMPONENTS = [
    ShowAsTooltipIfNotCompletelyVisibleDirective,
    FormFieldComponent,
    NumberControlComponent,
+   CombinedFormFieldComponent,
 ];
 
 @NgModule({
-   imports: [CommonModule, MatTooltipModule, MatIconModule, MatInputModule, FormsModule],
+   imports: [
+      CommonModule,
+      MatTooltipModule,
+      MatIconModule,
+      MatInputModule,
+      FormsModule,
+      ReactiveFormsModule,
+   ],
    declarations: [...COMPONENTS],
    exports: [...COMPONENTS],
 })

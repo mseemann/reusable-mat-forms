@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
    selector: 'app-root',
@@ -8,8 +8,13 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class AppComponent {
    numberLabel = 'Give me a number - and the label may be very very long';
-   nameControl = new FormControl<string | null>(null);
+   nameControl = new FormControl<string | null>('xyz');
    numberControl = new FormControl<number | null>(null, [Validators.required]);
+
+   form = new FormGroup({
+      aName: this.nameControl,
+      aNumber: this.numberControl,
+   });
 
    shortenTheLabel() {
       this.numberLabel = 'The Label';

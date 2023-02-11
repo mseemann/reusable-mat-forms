@@ -50,6 +50,9 @@
    <button mat-stroked-button (click)="shortenTheLabel()">Shorten the label</button>
 </div>
 
+<h3>A simple way to pass the form control</h3>
+<app-combined-form-field [control]="nameControl"></app-combined-form-field>
+
 <h3>The common way to use the form field</h3>
 <mat-form-field>
    <mat-label>Give me a name</mat-label>
@@ -58,3 +61,5 @@
    <mat-hint>Hint</mat-hint>
    <mat-error>any invalid input</mat-error>
 </mat-form-field>
+
+<pre>{{ form.value | json }}</pre>
