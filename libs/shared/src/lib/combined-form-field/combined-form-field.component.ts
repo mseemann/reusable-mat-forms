@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormControlDirective, NgControl } from '@angular/forms';
-import { createFormControlInputOutputTransformerProxy } from '../form-control-util';
+import { appendFormControlInputOutputTransformerProxy } from '../form-control-util';
 
 @Component({
    selector: 'app-combined-form-field',
@@ -14,15 +14,10 @@ export class CombinedFormFieldComponent implements OnInit {
    @ViewChild(FormControlDirective, { static: true }) input: NgControl | undefined;
 
    ngOnInit() {
-      if (this.input?.valueAccessor) {
-         this.input.valueAccessor = createFormControlInputOutputTransformerProxy<
-            string | null,
-            string | null
-         >(
-            this.input.valueAccessor,
-            (inputValue) => inputValue,
-            (value) => value?.trim() ?? null
-         );
-      }
+      appendFormControlInputOutputTransformerProxy<string | null, string | null>(
+         this.input,
+         (inputValue) => inputValue + '.',
+         (value) => value?.trim() ?? null
+      );
    }
 }

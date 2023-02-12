@@ -1,11 +1,14 @@
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
-export const createFormControlInputOutputTransformerProxy = <IN, OUT>(
-   valueAccessor: ControlValueAccessor,
+export const appendFormControlInputOutputTransformerProxy = <IN, OUT>(
+   ngControl: NgControl | undefined,
    transformIncommingValue: (inputValue: OUT) => IN,
    transformOutgoingValue: (outgoingValue: IN) => OUT
 ) => {
-   return new Proxy(valueAccessor, {
+   if (!ngControl?.valueAccessor) {
+      throw new Error('NgControl with valueAccessor is strongly needed to create a proxy');
+   }
+   ngControl.valueAccessor = new Proxy(ngControl.valueAccessor, {
       get(target: ControlValueAccessor, prop: keyof ControlValueAccessor, receiver) {
          if (prop === 'writeValue') {
             return (inputValue: OUT) => {

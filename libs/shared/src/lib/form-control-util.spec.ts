@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormControlDirective, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { createFormControlInputOutputTransformerProxy } from './form-control-util';
+import { appendFormControlInputOutputTransformerProxy } from './form-control-util';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,16 +19,11 @@ export class TestComponent implements OnInit {
    @ViewChild(FormControlDirective, { static: true }) input: NgControl | undefined;
 
    ngOnInit() {
-      if (this.input?.valueAccessor) {
-         this.input.valueAccessor = createFormControlInputOutputTransformerProxy<
-            string | null,
-            string | null
-         >(
-            this.input.valueAccessor,
-            (inputValue) => inputValue + '-test',
-            (outgoingValue) => outgoingValue?.trim() ?? null
-         );
-      }
+      appendFormControlInputOutputTransformerProxy<string | null, string | null>(
+         this.input,
+         (inputValue) => inputValue + '-test',
+         (outgoingValue) => outgoingValue?.trim() ?? null
+      );
    }
 }
 
@@ -64,5 +59,26 @@ describe('createFormControlInputOutputTransformerProxy', () => {
       const input = await loader.getHarness(MatInputHarness);
       await input.setValue('   xyz    ');
       expect(component.control.value).toEqual('xyz');
+   });
+
+   it('should throw an error if the ngControl is not present', () => {
+      expect(() => {
+         appendFormControlInputOutputTransformerProxy(
+            undefined,
+            (v) => v,
+            (v) => v
+         );
+      }).toThrow('NgControl with valueAccessor is strongly needed to create a proxy');
+   });
+
+   it('should throw an error if the valueAccessor is not present', () => {
+      const ngControl = {} as NgControl;
+      expect(() => {
+         appendFormControlInputOutputTransformerProxy(
+            ngControl,
+            (v) => v,
+            (v) => v
+         );
+      }).toThrow('NgControl with valueAccessor is strongly needed to create a proxy');
    });
 });
