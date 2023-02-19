@@ -1,3 +1,23 @@
+<h3>FormArray test</h3>
+<ng-container [formGroup]="form">
+   <mat-form-field
+      ><mat-label>Name</mat-label><input matInput [formControl]="form.controls.aName"
+   /></mat-form-field>
+   <mat-form-field
+      ><mat-label>Number</mat-label><input matInput [formControl]="form.controls.aNumber"
+   /></mat-form-field>
+   <ng-container
+      *ngFor="let item of form.controls.anArray.controls; let i = index; trackBy: trackBy"
+   >
+      <mat-form-field>
+         <mat-label>{{ i }}</mat-label>
+         <input matInput [formControl]="item.controls.description" />
+      </mat-form-field>
+   </ng-container>
+
+   <pre>{{ form.controls.anArray.errors | json }}</pre>
+</ng-container>
+
 <h3>Reusable form field with custom control</h3>
 <app-form-field
    [label]="numberLabel"
